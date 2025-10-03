@@ -1,5 +1,5 @@
 #include <string.h>
-#include <vector.h>
+#include <vector>
 #include <stdlib.h>
 #include <stdio.h>
 #include <omp.h>
