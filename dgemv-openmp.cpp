@@ -29,14 +29,23 @@ void my_dgemv(int n, double* A, double* x, double* y) {
 
 #pragma omp parallel
     {
+        int thread_id = omp_get_thread_num();
+        int local_buf_len = n / omp_get_num_threads();
+        int buf_offset = thread_id * local_buf_len;
+        std::vector<double> local_buf(local_buf_len);
+        memcpy(local_buf.data(), &y[buf_offset], local_buf_len);
+
 #pragma omp for
-        for (int i = 0; i < n; i++) {
-            double yval = y[i];
-            double* Arow = &A[i * n];
+        for (int i = 0; i < local_buf_len; i++) {
+            double yval = local_buf[i];
+            double* Arow = &A[(buf_offset + i) * n];
             for (int j = 0; j < n; j++) {
                 yval += Arow[j] * x[j];
             }
-            y[i] = yval;
+            local_buf[i] = yval;
         }
+
+#pragma omp critical
+        memcpy(&y[buf_offset], local_buf.data(), local_buf_len);
     }
 }
