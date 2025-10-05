@@ -29,9 +29,9 @@ PEAK_BANDWIDTH = 2.048e11
 TRANSFORM_LUT = {
     'runtime':      lambda n, t: t,
     'mflops':       lambda n, t: 2 * n * n / (t * 1000000),
-    'bandwidth':    lambda n, t: (8 * 2 * n + 2 * n * n / t) / 1e6,
-    'pct_bandwidth':lambda n, t: (100 * 8 * 2 * n + 2 * n * n / t) / PEAK_BANDWIDTH,
-    'avg_latency':  lambda n, t: 2 * n + 2 * n * n / t
+    'bandwidth':    lambda n, t: (8 * (n * (2 + 2 * n)) / t) / 1e9,
+    'pct_bandwidth':lambda n, t: 100 * ((8 * (n * (2 + 2 * n)) / t) / PEAK_BANDWIDTH),
+    'avg_latency':  lambda n, t: t / (n * (2 + 2 * n))
 }
 
 P_SIZES = [1, 4, 16, 64]
@@ -45,7 +45,8 @@ parser.add_argument('-a', '--average', action='store_true')
 args = parser.parse_args()
 fn = args.filename
 
-if args.transformation not in TRANSFORM_LUT.keys():
+if args.transformation not in TRANSFORM_LUT.keys() \
+        and args.transformation != 'speedup':
     raise Exception('not a recognized transformation')
 
 with open(fn, 'r') as f:
@@ -72,9 +73,13 @@ for i, p in enumerate(problems):
     print(m[1])
     if m:
         desc = m[1]
-        if desc == 'OpenMP':
-            desc = f'{desc}, P={P_SIZES[p_counter]}'
+        if desc == 'OpenMP dgemv':
+            desc = f'{desc}; P={P_SIZES[p_counter]}'
             p_counter += 1
+        elif 'Vectorized' in desc:
+            desc = 'Vectorized dgemv'
+        elif 'Basic' in desc:
+            desc = 'Basic dgemv'
         
         # if desc not in data.keys():
         #     data[desc] = {}                             # add impl to list "categories"
@@ -88,7 +93,10 @@ for i, p in enumerate(problems):
                 if not n in ns:
                     ns.append(n)
                 if args.transformation == 'speedup':
-                    data[desc][n] = data['Basic DGEMV'][n] / n
+                    if desc == 'Basic dgemv':
+                        data[desc][n] = t
+                    else:
+                        data[desc][n] = data['Basic dgemv'][n] / t
                 else:
                     data[desc][n] = TRANSFORM_LUT[args.transformation](n, t)
     
