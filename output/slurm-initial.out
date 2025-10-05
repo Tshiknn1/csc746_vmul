@@ -1,0 +1,84 @@
+Description:	Basic implementation of matrix-vector multiply.
+
+Working on problem size N=1024 
+Problem size N=1024 took 0.000891 seconds
+Working on problem size N=1024 
+Problem size N=1024 took 0.000872 seconds
+Working on problem size N=2048 
+Problem size N=2048 took 0.003569 seconds
+Working on problem size N=4096 
+Problem size N=4096 took 0.014550 seconds
+Working on problem size N=8192 
+Problem size N=8192 took 0.058389 seconds
+Working on problem size N=16384 
+Problem size N=16384 took 0.233081 seconds
+Description:	Vectorized implementation of matrix-vector multiply.
+
+Working on problem size N=1024 
+Problem size N=1024 took 0.000495 seconds
+Working on problem size N=1024 
+Problem size N=1024 took 0.000207 seconds
+Working on problem size N=2048 
+Problem size N=2048 took 0.000972 seconds
+Working on problem size N=4096 
+Problem size N=4096 took 0.004111 seconds
+Working on problem size N=8192 
+Problem size N=8192 took 0.016760 seconds
+Working on problem size N=16384 
+Problem size N=16384 took 0.068717 seconds
+Description:	OpenMP dgemv.
+
+Working on problem size N=1024 
+Problem size N=1024 took 0.000905 seconds
+Working on problem size N=1024 
+Problem size N=1024 took 0.000896 seconds
+Working on problem size N=2048 
+Problem size N=2048 took 0.003575 seconds
+Working on problem size N=4096 
+Problem size N=4096 took 0.014498 seconds
+Working on problem size N=8192 
+Problem size N=8192 took 0.058522 seconds
+Working on problem size N=16384 
+Problem size N=16384 took 0.237603 seconds
+Description:	OpenMP dgemv.
+
+Working on problem size N=1024 
+Problem size N=1024 took 0.000795 seconds
+Working on problem size N=1024 
+Problem size N=1024 took 0.000312 seconds
+Working on problem size N=2048 
+Problem size N=2048 took 0.001266 seconds
+Working on problem size N=4096 
+Problem size N=4096 took 0.003928 seconds
+Working on problem size N=8192 
+Problem size N=8192 took 0.015338 seconds
+Working on problem size N=16384 
+Problem size N=16384 took 0.061117 seconds
+Description:	OpenMP dgemv.
+
+Working on problem size N=1024 
+Problem size N=1024 took 0.001980 seconds
+Working on problem size N=1024 
+Problem size N=1024 took 0.000160 seconds
+Working on problem size N=2048 
+Problem size N=2048 took 0.000331 seconds
+Working on problem size N=4096 
+Problem size N=4096 took 0.003339 seconds
+Working on problem size N=8192 
+Problem size N=8192 took 0.013220 seconds
+Working on problem size N=16384 
+Problem size N=16384 took 0.052602 seconds
+Description:	OpenMP dgemv.
+
+Working on problem size N=1024 
+Problem size N=1024 took 0.007223 seconds
+Working on problem size N=1024 
+Problem size N=1024 took 0.000607 seconds
+Working on problem size N=2048 
+Problem size N=2048 took 0.001139 seconds
+Working on problem size N=4096 
+Problem size N=4096 took 0.002891 seconds
+Working on problem size N=8192 
+Problem size N=8192 took 0.012469 seconds
+Working on problem size N=16384 
+Problem size N=16384 took 0.049413 seconds
