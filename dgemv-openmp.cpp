@@ -14,7 +14,7 @@ const char* dgemv_desc = "OpenMP dgemv.";
  */
 
 void my_dgemv(int n, double* A, double* x, double* y) {
-#pragma omp parallel for
+#pragma omp parallel for schedule(static)
     for (int i = 0; i < n; i++) {
         double* Arow = &A[i * n];
         double yval = y[i];

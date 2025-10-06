@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -N 1
 #SBATCH -C cpu
-#SBATCH -q regular
+#SBATCH -q debug
 #SBATCH -J csc746_f25_evan_caplinger_sum
 #SBATCH --mail-user=ecaplinger@sfsu.edu
 #SBATCH --mail-type=ALL
